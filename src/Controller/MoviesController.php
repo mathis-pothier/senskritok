@@ -37,8 +37,8 @@ final class MoviesController extends AbstractController
             ->andWhere('m.year LIKE :year')
             ->setParameter('year', '%' . $request->query->get('year', '') . '%')
             ->join('m.categories', 'c')
-            ->andWhere('c.name LIKE :category')
-            ->setParameter('category', '%' . $request->query->get('category', '') . '%');
+            ->andWhere('c.id LIKE :categorie')
+            ->setParameter('categorie', '%' . $request->query->get('categorie', '') . '%');
         return $this->json($paginator->paginate($query, $paginationDTO), Response::HTTP_OK, [], ['groups' => ['movie:read', 'paginate']]);
     }
 

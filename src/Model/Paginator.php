@@ -17,7 +17,7 @@ class Paginator
     public int $lastPage;
 
     #[Groups("paginate")]
-    public $items;
+    public mixed $items;
 
     public function paginate(QueryBuilder $query, PaginationDTO $paginationDTO): self
     {
