@@ -6,6 +6,7 @@ use App\Repository\MovieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: MovieRepository::class)]
 class Movie
@@ -13,14 +14,18 @@ class Movie
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['movie:read'])]
     private ?int $id = null;
 
+    #[Groups(['movie:read'])]
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
+    #[Groups(['movie:read'])]
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
+    #[Groups(['movie:read'])]
     #[ORM\Column]
     private ?int $year = null;
 
@@ -28,6 +33,7 @@ class Movie
      * @var Collection<int, Categorie>
      */
     #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'movies')]
+    #[Groups(['movie:read'])]
     private Collection $categories;
 
     public function __construct()
